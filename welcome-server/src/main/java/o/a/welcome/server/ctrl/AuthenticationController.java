@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import o.a.welcome.server.dao.UserSessionDao;
 import o.a.welcome.server.dao.UserDao;
@@ -25,6 +26,7 @@ public class AuthenticationController {
 	private UserSessionDao _sd;
 	
 	@RequestMapping(method=RequestMethod.POST, path="/login")
+	@ResponseBody
 	public UserDto login(
 			@RequestBody LoginDto loginDto)
 					throws InvalidUsernameOrPasswordException {
@@ -42,6 +44,7 @@ public class AuthenticationController {
 	}
 	
 	@RequestMapping(path="/logout", method=RequestMethod.GET)
+	@ResponseBody
 	public void logout(
 			@RequestHeader("X-Authentication") String token)
 					throws InvalidSessionException {
