@@ -9,7 +9,7 @@ import javax.persistence.Id;
 import javax.persistence.OneToOne;
 
 @Entity
-public class Session {
+public class UserSession {
 	
 	@Id
 	private String token;
@@ -20,7 +20,7 @@ public class Session {
 	@Column(nullable=false)
 	private Date lastSeen;
 
-	public Session() {
+	public UserSession() {
 		super();
 		this.lastSeen = new Date();
 		this.token = UUID.randomUUID().toString();
@@ -30,7 +30,7 @@ public class Session {
 		return user;
 	}
 
-	public Session setUser(User user) {
+	public UserSession setUser(User user) {
 		this.user = user;
 		return this;
 	}

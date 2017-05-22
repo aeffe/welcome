@@ -95,7 +95,7 @@ public class User {
 		return this;
 	}
 	
-	public UserDto extractDto(Session session) {
+	public UserDto extractDto(UserSession session) {
 		
 		return new UserDto(
 				this.username,

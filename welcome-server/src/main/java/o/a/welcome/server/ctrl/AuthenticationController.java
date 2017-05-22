@@ -7,11 +7,11 @@ import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import o.a.welcome.server.dao.SessionDao;
+import o.a.welcome.server.dao.UserSessionDao;
 import o.a.welcome.server.dao.UserDao;
 import o.a.welcome.server.dto.LoginDto;
 import o.a.welcome.server.dto.UserDto;
-import o.a.welcome.server.model.Session;
+import o.a.welcome.server.model.UserSession;
 import o.a.welcome.server.model.User;
 
 @Controller
@@ -22,7 +22,7 @@ public class AuthenticationController {
 	private UserDao _ud;
 	
 	@Autowired
-	private SessionDao _sd;
+	private UserSessionDao _sd;
 	
 	@RequestMapping(method=RequestMethod.POST, path="/login")
 	public UserDto login(
@@ -32,7 +32,7 @@ public class AuthenticationController {
 		User user = this._ud.findOne(loginDto.getUsername()).orElseThrow(() -> new InvalidUsernameOrPasswordException());
 		
 		if (user.matchPassword(loginDto.getPassword())) {
-			Session session = _sd.create()
+			UserSession session = _sd.create()
 					.setUser(user);
 			this._sd.save(session);
 			return user.extractDto(session);
@@ -46,7 +46,7 @@ public class AuthenticationController {
 			@RequestHeader("X-Authentication") String token)
 					throws InvalidSessionException {
 		
-		Session session = this._sd.findOne(token).orElseThrow(() -> new InvalidSessionException());
+		UserSession session = this._sd.findOne(token).orElseThrow(() -> new InvalidSessionException());
 		this._sd.delete(session);
 	}
 
