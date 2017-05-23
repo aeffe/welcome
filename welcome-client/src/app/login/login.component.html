@@ -1,14 +1,21 @@
-<p>
-	<md-input-container>
-		<input mdInput placeholder="Username" [(ngModel)]="loginDto.username"/>
-	</md-input-container>
-</p>
-<p>
-	<md-input-container>
-		<input mdInput placeholder="Password"  [(ngModel)]="loginDto.password" type="password"/>
-	</md-input-container>
-</p>
-<p>
-	<button md-button (click)="login()">LOGIN</button>
-	<button md-button (click)="clear()">CLEAR</button>
-</p>
+<md-card>
+	<md-card-header>
+		<md-card-title>Login</md-card-title>
+	</md-card-header>
+	<md-card-content>
+		<p>
+			<md-input-container>
+				<input mdInput placeholder="Username" [(ngModel)]="loginDto.username"/>
+			</md-input-container>
+		</p>
+		<p>
+			<md-input-container>
+				<input mdInput placeholder="Password"  [(ngModel)]="loginDto.password" type="password"/>
+			</md-input-container>
+		</p>
+	</md-card-content>
+	<md-card-actions>
+		<button md-button (click)="login()">LOGIN</button>
+		<button md-button (click)="clear()">CLEAR</button>
+	</md-card-actions>
+</md-card>
