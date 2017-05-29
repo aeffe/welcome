@@ -1,3 +1,7 @@
 .center-block {
   margin: 2em auto auto;
 }
+
+.buttons-line {
+  text-align: right;
+}

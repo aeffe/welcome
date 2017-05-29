@@ -2,23 +2,23 @@
   <div class="center-block col-lg-6">
     <div class="card">
       <div class="card-header">
-        <h4 class="card-title">Login</h4>
+        <h4 class="card-title"><i class="fa fa-user-circle-o"></i> Login</h4>
       </div>
       <div class="card-block">
         <div class="form">
-          <p class="form-group">
-            <label>Username</label>
-            <input class="form-control"/>
+          <p class="input-group">
+            <span class="input-group-addon"><i class="fa fa-user fa-fw"></i></span>
+            <input class="form-control" [(ngModel)]="loginDto.username" placeholder="Username"/>
           </p>
-          <p class="form-group">
-            <label>Password</label>
-            <input class="form-control" type="password"/>
+          <p class="input-group margin-bottom-sm">
+            <span class="input-group-addon"><i class="fa fa-key fa-fw"></i></span>
+            <input class="form-control" type="password" [(ngModel)]="loginDto.password" placeholder="Password"/>
           </p>
         </div>
       </div>
-      <div class="card-footer">
-        <button class="btn btn-default" (click)="login()">LOGIN</button>
-        <button class="btn" (click)="clear()">CLEAR</button>
+      <div class="card-footer buttons-line">
+        <button class="btn btn-default" (click)="login()"><i class="fa fa-sign-in"></i> LOGIN</button>
+        <button class="btn" (click)="clear()"><i class="fa fa-eraser"></i> CLEAR</button>
       </div>
     </div>
   </div>
