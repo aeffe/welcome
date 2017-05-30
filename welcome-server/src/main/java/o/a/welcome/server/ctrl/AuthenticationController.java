@@ -27,7 +27,7 @@ public class AuthenticationController {
 	private UserSessionDao _sd;
 	
 	@CrossOrigin(
-				origins = { "*" }
+				origins = { "http://localhost:4200" }
 			,	allowedHeaders = {
 						"X-Authentication"
 					,	"Content-Type"
@@ -41,15 +41,30 @@ public class AuthenticationController {
 			,	methods = {
 						RequestMethod.OPTIONS
 					,	RequestMethod.POST
-					})
+					}
+			,	exposedHeaders= {
+					"X-Authentication"
+				,	"Content-Type"
+				,	"Accept"
+				,	"Access-Control-Allow-Origin"
+				,	"Access-Control-Allow-Credentials"
+				,	"Access-Control-Allow-Methods"
+				,	"Access-Control-Max-Age"
+				,	"Access-Control-Allow-Headers"					
+			})
 	@RequestMapping(
 				method = RequestMethod.POST
 			,	path = "/login"
-			,	headers = {
-						"Accept: application/json"
-					,	"Content-Type: application/json"
-		
-			})
+//			,	headers = {
+//						"Accept: application/json"
+//					,	"Content-Type: application/json"
+//					,	"Access-Control-Allow-Origin: http://localhost:4200"
+//					,	"Access-Control-Allow-Credentials: true"
+//					,	"Access-Control-Allow-Methods: GET, OPTIONS, POST"
+//				}
+			,	produces = "application/json"
+			,	consumes = "application/json"
+	)
 	@ResponseBody
 	public UserDto login(
 			@RequestBody LoginDto loginDto)
@@ -68,7 +83,7 @@ public class AuthenticationController {
 	}
 	
 	@CrossOrigin(
-			origins = { "*" }
+			origins = { "http" }
 			,	allowedHeaders = { "X-Authentication" }
 			,	methods = {
 						RequestMethod.OPTIONS

@@ -2,9 +2,13 @@
   <div class="center-block col-lg-6">
     <div class="card">
       <div class="card-header">
-        <h4 class="card-title"><i class="fa fa-user-circle-o"></i> Login</h4>
+        <h3 class="card-title"><i class="fa fa-user-circle-o"></i> Login</h3>
+        <h6 class="card-subtitle mb-2 text-muted">Insert username and password</h6>
       </div>
       <div class="card-block">
+        <div *ngIf="showAlert" class="alert alert-danger">
+          Errore: {{alertMessage}}
+        </div>
         <div class="form">
           <p class="input-group">
             <span class="input-group-addon"><i class="fa fa-user fa-fw"></i></span>

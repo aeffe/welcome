@@ -18,6 +18,8 @@ import { User } from './user';
 export class LoginComponent implements OnInit {
 
   public loginDto:LoginDto = new LoginDto("","");
+  public showAlert:boolean = false;
+  public alertMessage = "";
 
   constructor(
       private _authService: AuthService
@@ -28,14 +30,29 @@ export class LoginComponent implements OnInit {
 
   login() {
 
-    this._authService
+    let retVal = this._authService
       .login(this.loginDto)
-      .then( jsonUser => console.log(jsonUser) );
+      .then( jsonUser => console.log(jsonUser) )
+      .catch( this.handleLoginException );
+
+    if ( retVal ) {
+      this.showAlert = true;
+      this.alertMessage = "Invalid username or password!";
+    }
 
   }
 
   clear() {
     this.loginDto = new LoginDto("","");
+    this.showAlert = false;
   }
+
+  private handleLoginException(error: any): Promise<any> {
+    console.log("************ Entering the handleLoginException");
+    this.showAlert = true;
+    this.alertMessage = "Invalid username or password!";
+    return Promise.reject(error.message || error);
+  }
+
 
 }
