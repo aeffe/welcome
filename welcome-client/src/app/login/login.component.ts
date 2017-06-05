@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Http } from '@angular/http';
+// import { Router } from '@angular/router';
 
 import { AuthService } from './auth.service';
 import { LoginDto } from './login-dto';
@@ -12,7 +13,8 @@ import { User } from './user';
     './login.component.css'
   ]
   , providers: [
-    AuthService
+    , AuthService
+//    , Router
   ]
 })
 export class LoginComponent implements OnInit {
@@ -20,9 +22,11 @@ export class LoginComponent implements OnInit {
   public loginDto:LoginDto = new LoginDto("","");
   public showAlert:boolean = false;
   public alertMessage = "";
+  public currentUser:User = null;
 
   constructor(
-      private _authService: AuthService
+        private _authService: AuthService
+      // , private _router: Router
   ) { }
 
   ngOnInit() {
@@ -32,12 +36,15 @@ export class LoginComponent implements OnInit {
 
     let retVal = this._authService
       .login(this.loginDto)
-      .then( jsonUser => console.log(jsonUser) )
+      .then( jsonUser => this.currentUser = jsonUser as User )
       .catch( this.handleLoginException );
 
-    if ( retVal ) {
+    if ( retVal && !this.currentUser ) {
       this.showAlert = true;
       this.alertMessage = "Invalid username or password!";
+    } else {
+      console.log("Logged in!")
+      // this._router.navigate(['home']);
     }
 
   }
