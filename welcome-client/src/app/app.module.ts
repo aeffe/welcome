@@ -9,42 +9,29 @@ import { LoginComponent } from './login/login.component';
 import { HomeComponent } from './home/home.component';
 import { PublicHomeComponent } from './public-home/public-home.component';
 
+import { IsLoggedIn } from './login/is-logged-in';
+import { AuthService } from './login/auth.service';
+
+import { routes } from './app.routes';
+import { NavbarComponent } from './navbar/navbar.component';
+
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
     HomeComponent,
-    PublicHomeComponent
+    PublicHomeComponent,
+    NavbarComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
     HttpModule,
-    RouterModule.forRoot([
-      {
-        path: '',
-        redirectTo: '/public-home',
-        pathMatch: 'full'
-      },
-      {
-        path: 'home',
-        component: HomeComponent
-      },
-      {
-        path: 'public-home',
-        component: PublicHomeComponent
-      },
-      {
-        path: 'login',
-        component: LoginComponent
-      },
-      {
-        path: 'home',
-        component: HomeComponent
-      }
-    ])
+    RouterModule.forRoot( routes )
   ],
   providers: [
+    IsLoggedIn,
+    AuthService
   ],
   bootstrap: [AppComponent]
 })

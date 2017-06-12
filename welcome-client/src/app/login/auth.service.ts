@@ -55,6 +55,23 @@ export class AuthService {
       ;
   }
 
+  isAuthenticated(): boolean {
+    let user = localStorage.getItem("currentUser");
+
+    if ( user ) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  currentUser(): User {
+    let strUser = localStorage.getItem("currentUser");
+    let user = JSON.parse(strUser) as User;
+
+    return user;
+  }
+
   private handleError(error: any): Promise<any> {
     console.log(">>>>>>>>>>>>> Error: ", error.message || error);
     return Promise.reject(error.message || error);

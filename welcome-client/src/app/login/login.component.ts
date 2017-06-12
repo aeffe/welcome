@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Http } from '@angular/http';
-// import { Router } from '@angular/router';
+import { Router } from '@angular/router';
 
 import { AuthService } from './auth.service';
 import { LoginDto } from './login-dto';
@@ -14,7 +14,6 @@ import { User } from './user';
   ]
   , providers: [
     , AuthService
-//    , Router
   ]
 })
 export class LoginComponent implements OnInit {
@@ -26,7 +25,7 @@ export class LoginComponent implements OnInit {
 
   constructor(
         private _authService: AuthService
-      // , private _router: Router
+      , private _router: Router
   ) { }
 
   ngOnInit() {
@@ -39,12 +38,14 @@ export class LoginComponent implements OnInit {
       .then( jsonUser => this.currentUser = jsonUser as User )
       .catch( this.handleLoginException );
 
+    console.log("----->> RETVAL      : " + retVal);
+    console.log("----->> CURRENTUSER : " + this.currentUser)
     if ( retVal && !this.currentUser ) {
       this.showAlert = true;
       this.alertMessage = "Invalid username or password!";
     } else {
       console.log("Logged in!")
-      // this._router.navigate(['home']);
+      this._router.navigate(['home']);
     }
 
   }
